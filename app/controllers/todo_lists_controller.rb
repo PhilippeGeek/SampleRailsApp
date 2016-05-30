@@ -69,6 +69,6 @@ class TodoListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def todo_list_params
-      params.fetch(:todo_list, {})
+      params.fetch(:todo_list, {}).permit(:name, :description, tags_ids: [])
     end
 end
