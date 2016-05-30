@@ -11,10 +11,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530092414) do
+ActiveRecord::Schema.define(version: 20160530094755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags_tasks", id: false, force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "task_id"
+  end
+
+  add_index "tags_tasks", ["tag_id", "task_id"], name: "index_tags_tasks_on_tag_id_and_task_id", using: :btree
+  add_index "tags_tasks", ["task_id"], name: "index_tags_tasks_on_task_id", using: :btree
+
+  create_table "tags_todo_lists", id: false, force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "todo_list_id"
+  end
+
+  add_index "tags_todo_lists", ["tag_id", "todo_list_id"], name: "index_tags_todo_lists_on_tag_id_and_todo_list_id", using: :btree
+  add_index "tags_todo_lists", ["todo_list_id"], name: "index_tags_todo_lists_on_todo_list_id", using: :btree
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "done"
+    t.datetime "due_for"
+    t.integer  "todo_list_id"
+    t.text     "notes"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "todo_lists", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
