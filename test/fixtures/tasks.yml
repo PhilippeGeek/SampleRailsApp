@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  done: false
+  due_for: 2016-05-30 11:32:11
+  todo_list_id: 1
+  notes: MyText
+
+two:
+  name: MyString
+  done: false
+  due_for: 2016-05-30 11:32:11
+  todo_list_id: 1
+  notes: MyText
